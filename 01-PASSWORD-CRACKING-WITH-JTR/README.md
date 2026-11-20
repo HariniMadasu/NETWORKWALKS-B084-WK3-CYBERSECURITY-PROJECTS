@@ -1,145 +1,171 @@
-# 🔓 PDF Password Cracking Using John the Ripper
+# PROJECT 1: 🔓 PDF Password Cracking Using John the Ripper
 
-### Network Walks Cybersecurity Training – Week 3 | Batch B084
+### John the Ripper Jumbo | Hash Extraction, Wordlist Attack and Password Verification
 
 ## 1. Project Overview
 
-This project demonstrates the use of **John the Ripper**, an open-source password security auditing tool, to perform dictionary-based password recovery on a password-protected PDF document.
+This practical demonstrates the use of **John the Ripper Jumbo**, an open-source password security auditing tool, to perform dictionary-based password recovery on an assigned password-protected PDF document.
 
-The practical involved extracting the PDF password hash, preparing it for John the Ripper, executing a wordlist-based password audit, and verifying the recovery result by opening the original PDF.
+The exercise involved extracting a PDF-specific password hash, preparing the hash for John the Ripper, executing a wordlist-based audit through Windows PowerShell, and verifying the recovered password by opening the original PDF.
 
-The exercise helped me understand how password hashes can be used during password security assessments and how dictionary attacks work.
+The objective was to understand the command-line workflow involved in PDF password auditing and gain practical experience with a widely used password security tool.
 
-## 2. Objectives
+## 2. Tools and Resources
 
-- Understand the purpose of PDF password hash extraction.
-- Prepare an extracted PDF hash for password auditing.
-- Set up and use John the Ripper on Windows.
-- Perform a dictionary-based password audit using a wordlist.
-- Check the recovered result using John the Ripper.
-- Verify successful password recovery by opening the PDF.
+| Tool | Purpose | Link |
+|---|---|---|
+| John the Ripper Jumbo | Password auditing and recovery | [Download – Openwall](https://www.openwall.com/john/) |
+| PowerShell | Executing commands | Built into Windows |
+| OnlineHashCrack PDF Hash Extractor | Extracting the PDF password hash | [Open Tool](https://www.onlinehashcrack.com/tools-pdf-hash-extractor.php) |
+| `password.lst` | Wordlist for dictionary-based auditing | Included with the John package |
 
-## 3. Tools & Technologies Used
+**Version used:** John the Ripper 1.9.0 Jumbo-1, Windows 64-bit.
 
-| Tool | Purpose |
-|---|---|
-| John the Ripper Jumbo 1.9.0 | Password auditing and recovery |
-| PowerShell | Executing John the Ripper commands |
-| PDF Hash Extractor | Extracting the password hash from the PDF |
-| `password.lst` | Wordlist used for dictionary-based auditing |
-| Windows | Operating environment |
+**Interface used:** Command-Line Interface (CLI).
 
-## 4. Practical Implementation
+## 3. Objectives
 
-### Step 1 – Downloading and Extracting John the Ripper
+- Download and configure John the Ripper on Windows.
+- Verify the command-line executable.
+- Extract the password hash from a protected PDF.
+- Prepare the extracted hash in a text file.
+- Perform dictionary-based password auditing.
+- Display the recovered result.
+- Verify successful recovery by opening the original PDF.
 
-Downloaded the Windows 64-bit Jumbo build of John the Ripper and extracted the ZIP archive.
+## 4. Methodology and Implementation
 
-The `john.exe` executable was available inside the extracted `run` directory.
+### Step 1 – Downloading John the Ripper
+
+Downloaded the Windows 64-bit Jumbo build from the official Openwall website.
+
+The downloaded ZIP archive was extracted, and the `john.exe` executable was located inside the `run` directory.
+
+**Download:** [John the Ripper – Official Openwall Website](https://www.openwall.com/john/)
 
 ### Step 2 – Verifying the Installation
 
-Opened PowerShell in the John the Ripper `run` directory and executed:
+Opened PowerShell in the extracted John the Ripper `run` directory.
+
+Executed the following command:
 
 ```powershell
 .\john.exe --help
 ```
 
-This displayed the available command-line options and confirmed that the executable could be run.
+The command displayed the available options and usage information, confirming that John the Ripper could be executed successfully.
 
 ### Step 3 – Extracting the PDF Password Hash
 
-Used an online PDF hash extraction tool to extract the password hash from the assigned protected PDF.
+Used the OnlineHashCrack PDF Hash Extractor to extract the password hash from the assigned protected PDF document.
 
-The extracted hash was copied into a text file named `hash1.txt` and stored locally for the practical.
+**Tool:** [OnlineHashCrack – PDF Hash Extractor](https://www.onlinehashcrack.com/tools-pdf-hash-extractor.php)
 
-The hash was kept private and was not included in this repository.
+The extracted PDF-specific hash was copied into a text file named `hash1.txt`.
+
+The hash file was stored locally and was not uploaded to the public repository.
 
 ### Step 4 – Performing Dictionary-Based Password Auditing
 
-Executed John the Ripper with the supplied wordlist and extracted hash file:
+Used the supplied `password.lst` wordlist to perform the password audit.
+
+The following command was executed in PowerShell:
 
 ```powershell
 .\john.exe --wordlist=password.lst "C:\Cybersecurity-Tools\Week3\Locked-Files\hash1.txt"
 ```
 
-John the Ripper tested candidate passwords from the wordlist against the extracted PDF password hash.
+John the Ripper tested the candidate passwords in the wordlist against the extracted PDF password hash.
 
-### Step 5 – Checking the Recovery Result
+### Step 5 – Displaying the Recovery Result
 
-Used the following command to display the recovered result:
+After the cracking process, the following command was used:
 
 ```powershell
 .\john.exe --show "C:\Cybersecurity-Tools\Week3\Locked-Files\hash1.txt"
 ```
 
-The tool reported that the password hash had been successfully cracked.
+The output indicated that the password hash had been successfully cracked.
 
-### Step 6 – Verifying the PDF
+The recovered password has been intentionally excluded from this documentation.
+
+### Step 6 – PDF Verification
 
 Opened the original password-protected PDF and entered the recovered password.
 
-The PDF opened successfully, confirming the password recovery result.
+The PDF opened successfully, confirming that the password recovery process was successful.
 
-## 5. Screenshots & Evidence
+## 5. Screenshots and Practical Evidence
 
-The following screenshots document the major stages of the practical.
+The following screenshots document the major stages of the practical implementation.
 
-### 01. PDF Password Hash Extraction
+### 5.1 PDF Hash Extraction
 
-Evidence of extracting the PDF-specific password hash.
+The PDF password hash was extracted using the OnlineHashCrack PDF Hash Extractor.
 
 ![PDF Hash Extraction](./Screenshots/01_Pdf_Hash_Extraction.png)
 
-### 02. John the Ripper Password Cracking Result
+### 5.2 John the Ripper – Password Recovery Result
 
-Evidence of executing the dictionary-based audit and obtaining a successful password recovery result.
+The command-line output shows the execution of John the Ripper and the successful password recovery result.
 
 ![John the Ripper Result](./Screenshots/02_Password_Cracking_Results.png)
 
-### 03. PDF Unlock Verification
+### 5.3 PDF Unlock Verification
 
-Evidence confirming that the original PDF opened successfully after password recovery.
+The recovered password was used to open the original PDF successfully.
 
-![PDF Unlock Verification](./Screenshots/03_Pdf_Unlock_Verification.png)
+![PDF Verification](./Screenshots/03_Pdf_Unlock_Verification.png)
 
-## 6. Observations
+## 6. Commands Used
 
-- PDF password auditing requires the appropriate PDF-specific hash format.
-- John the Ripper supports wordlist-based password auditing through its command-line interface.
-- The `--wordlist` option allows candidate passwords to be tested from a supplied list.
-- The `--show` option can be used to check previously recovered passwords.
-- Successful recovery was confirmed by opening the original PDF.
+| Command | Description |
+|---|---|
+| `.\john.exe --help` | Displays command-line usage information |
+| `.\john.exe --wordlist=password.lst hash1.txt` | Performs a wordlist-based password audit |
+| `.\john.exe --show hash1.txt` | Displays previously recovered results |
 
-## 7. Key Learning Outcomes
+## 7. Observations
 
-Through this practical, I learned:
+- A PDF-specific password hash is required for this type of password auditing.
+- John the Ripper supports dictionary-based password auditing through its wordlist option.
+- PowerShell can be used to execute the tool directly from its extracted directory.
+- The `--show` option provides a way to check previously recovered passwords.
+- The final result was verified by successfully opening the original PDF.
 
-1. How to download and use the John the Ripper command-line tool.
-2. How to extract and prepare a PDF password hash.
-3. How dictionary-based password auditing works.
-4. How to execute John the Ripper commands through PowerShell.
-5. How to verify password recovery using the original protected document.
+## 8. Learning Outcomes
 
-## 8. Security & Ethical Considerations
+Through this practical, I gained experience in:
 
-This practical was performed for educational purposes using an assigned lab document.
+1. Downloading and running John the Ripper Jumbo on Windows.
+2. Extracting PDF password hashes.
+3. Preparing hash files for password auditing.
+4. Executing wordlist-based password recovery through PowerShell.
+5. Understanding the purpose of the `--wordlist` and `--show` options.
+6. Verifying password recovery using the original document.
 
-- Password auditing should only be performed on documents that you own or are authorized to assess.
-- Extracted hashes and recovered passwords must be kept confidential.
-- Original protected documents, password hashes, and recovered passwords are not included in this public repository.
-- Password-cracking techniques must never be used for unauthorized access.
+## 9. Security and Ethical Considerations
 
-## 9. Conclusion
+- The practical was performed using an assigned training document.
+- Password auditing must only be performed on files that you own or have permission to assess.
+- Extracted hashes and recovered passwords must be kept private.
+- Original PDFs, hash files, and recovered passwords are excluded from this public repository.
+- Strong, unique passwords should be used to protect sensitive documents.
 
-This practical provided hands-on experience with John the Ripper and demonstrated how dictionary-based password auditing can be performed on password-protected PDF documents.
+## 10. Conclusion
 
-By extracting the PDF password hash, executing a wordlist-based audit, checking the recovery result, and verifying the original PDF, I gained a practical understanding of the basic PDF password-auditing workflow.
+This practical provided hands-on experience with John the Ripper Jumbo and its command-line password auditing capabilities.
+
+The workflow covered PDF hash extraction, wordlist-based password auditing, result verification, and successful opening of the original protected PDF.
+
+The exercise helped develop a practical understanding of dictionary-based password attacks and the importance of secure password selection.
+
+## 11. Author
+
+**Harini Madasu**  
+B.Tech – Mathematics and Computing  
+Central University of Karnataka
+
+**LinkedIn:** [Connect with me](https://www.linkedin.com/in/harini-madasu-91258b357)
 
 ---
-
-**Author:** Harini Madasu  
-**Program:** Network Walks – Cybersecurity Training  
-**Batch:** B084  
-**Week:** 03  
-**Project:** PDF Password Cracking Using John the Ripper
